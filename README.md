@@ -1,7 +1,7 @@
-# TeachMate — C++23 Bootcamp
+# TeachMate — C++17 Bootcamp
 
 A 4-week, hands-on C++ course for bachelor students. It moves from the smallest
-possible program to modern C++23 by **stacking one new layer at a time**, while a
+possible program to modern C++ by **stacking one new layer at a time**, while a
 single capstone project ("Gradebook / Student Records Manager") grows along with
 the material.
 
@@ -9,76 +9,92 @@ the material.
 Students who have never written C++, or who have written a little code in another
 language. No prior C/C++ experience is assumed.
 
-## Toolchain (Code::Blocks + MinGW-w64 GCC)
-The examples target **C++23** and are built with **Code::Blocks**.
+## Toolchain (VS Code + a C++17 compiler)
+The course targets **C++17** — the sweet spot for teaching: modern enough for
+`std::optional`, `std::variant`, structured bindings and move semantics, without
+the extra syntax of later standards.
 
-1. Install Code::Blocks **with the MinGW-w64 compiler** (the "codeblocks-*-mingw-setup.exe"
-   download). The bundled GCC must be **13 or newer** for C++23 features such as
-   `std::format`, `std::ranges` and `std::expected`.
-2. Check your compiler version: open Code::Blocks -> Settings -> Compiler ->
-   Toolchain executables, or run `g++ --version` from the MinGW `bin` folder.
-   - If GCC is older than 13, install a newer MinGW-w64 (e.g. a recent
-     winlibs.com build) and point Code::Blocks at it: **Settings -> Compiler ->
-     Toolchain executables -> Compiler's installation directory**.
-3. Enable the C++23 language standard. For every project:
-   **Project -> Build options -> Compiler settings -> Other options** and add:
+- **Editor:** Visual Studio Code with the **C/C++ extension** (`ms-vscode.cpptools`).
+- **Compiler:** MinGW-w64 **GCC** through **MSYS2 (UCRT64)** — the official route.
 
+> **Never installed C++ before? Follow the full walkthrough:
+> [`docs/setup-windows.md`](docs/setup-windows.md).**
+
+Short version:
+
+1. Install **VS Code** and **MSYS2** (<https://www.msys2.org/>, default `C:\msys64`).
+2. Open **MSYS2 UCRT64**, run `pacman -Syu` (repeat until clean), then:
    ```
-   -std=c++23 -Wall -Wextra -Wpedantic
+   pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain
+   ```
+3. Add `C:\msys64\ucrt64\bin` to your **PATH**, reopen the terminal, and check:
+   ```
+   g++ --version
    ```
 
-   All `.cbp` files in this repo already contain these flags.
-   If your compiler rejects `-std=c++23`, use the temporary alias `-std=c++2b`.
+Any MinGW-w64 **GCC 13+** works (e.g. WinLibs via
+`winget install BrechtSanders.WinLibs.POSIX.UCRT` is a one-command alternative).
+If `g++` is not on `PATH`, add its `bin` folder, or set the `CXX` environment
+variable to the full path of your `g++.exe` (the `run.cmd` and `build-all.cmd`
+scripts honour `CXX`).
 
-## How to build and run a lesson
-1. Open Code::Blocks.
-2. **File -> Open** and pick the lesson's `.cbp` file, e.g.
-   `CPP/week1/lesson01_hello/lesson01_hello.cbp`.
-3. Press **F9** (Build and run), or use **Build -> Build** (F9 builds and runs;
-   Ctrl-F9 builds only).
-4. Debugging: set a breakpoint by clicking the left gutter, then press **F8**
-   (Debug -> Start). Use **F7** to step into and **Shift-F7** to step over.
+### Quick start (VS Code)
+1. Open the `TeachMate` folder in VS Code (**File → Open Folder…**).
+2. Open any lesson, e.g. `CPP/week1/lesson01_hello/main.cpp`.
+3. **Ctrl+Shift+B** builds it; **F5** builds and debugs it.
+   Output goes to `build/<lesson>.exe`.
+4. If VS Code asks, install the **C/C++** extension
+   (Extensions view → search `C/C++` → Install).
 
-A `week1.workspace` file is provided so you can open all Week 1 projects at once:
-**File -> Open -> CPP/week1/week1.workspace**.
+### Quick start (terminal)
+From the `CPP` folder:
+```
+run.cmd week1\lesson01_hello
+```
+This compiles and runs one lesson with the same compiler and flags.
 
-### Why one project per lesson?
-Code::Blocks compiles and links **every** `.cpp` file that belongs to a project.
-If two lessons with two `main()` functions lived in one project, the linker would
-fail with a "multiple definition of `main`" error. Each lesson is therefore its
-own small project.
+## Why one file per lesson?
+Every lesson is a **single `main.cpp`**. There are no project files to create or
+configure, so students spend their attention on C++ concepts (variables, loops,
+functions, classes, the STL) instead of on build settings.
 
 ## Repository layout
 ```
 TeachMate/
   README.md                 this file
+  .vscode/                  shared VS Code build/debug config (C++17, g++)
+  docs/setup-windows.md     step-by-step C++ setup for Windows (start here)
+  docs/cheatsheet.md        create / compile / run + symbol reference
   docs/roadmap.md           full 4-week schedule, challenges and grading
   CPP/                      all C++ source code lives here
+    run.cmd                 build + run one lesson
+    build-all.cmd           compile every lesson and report warnings
     week1/                  foundations: 13 short lessons + 3 challenges
-      lesson01_hello/       main.cpp + lesson01_hello.cbp
+      lesson01_hello/main.cpp
       ...
-      week1.workspace       opens all 13 Week 1 projects
-    week2/                  data: format, arrays, strings, structs, vectors, files
-      lesson14_format/      main.cpp + lesson14_format.cbp
+    week2/                  data: formatting, arrays, strings, structs, vectors, files
+      lesson14_format/main.cpp
       ...
-      week2.workspace       opens all 12 Week 2 projects
     week3/                  objects: classes, inheritance, polymorphism, smart pointers
-      lesson26_classes/     main.cpp + lesson26_classes.cbp
+      lesson26_classes/main.cpp
       ...
-      week3.workspace       opens all 11 Week 3 projects
+    week4/                  modern: templates, STL, algorithms, optional, exceptions
+      lesson37_templates_func/main.cpp
+      ...
     capstone/stage1/        first layer of the evolving project
     capstone/stage2/        structs + vector + file menu
     capstone/stage3/        classes + polymorphism + smart pointer
-    (week4 and capstone/stage4 are added as the course progresses)
+    capstone/stage4/        generic Repository<T> (final)
+  build/                    compiled programs (created by the tools; ignored by git)
 ```
 
 ## Roadmap at a glance
 | Week | Theme | Capstone layer |
 |------|-------|----------------|
 | 1 | Foundations: printing, variables, input, flow, functions | Average of three marks (no menu/array yet) |
-| 2 | Arrays, strings, structs, pointers, vectors, files | Records in a `vector`, save/load to file |
+| 2 | Formatting, arrays, strings, structs, vectors, files | Records in a `vector`, save/load to file |
 | 3 | Classes, encapsulation, RAII, inheritance, polymorphism | `Student` + `Gradebook` classes, polymorphic `Report` |
-| 4 | Templates, STL, algorithms, ranges, exceptions, move | Generic `Repository<T>` final application |
+| 4 | Templates, STL, algorithms, optional/variant, exceptions | Generic `Repository<T>` final application |
 
 See `docs/roadmap.md` for every lesson and challenge.
 

@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build active file (g++ C++17)",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-Wpedantic",
+                "-g",
+                "${file}",
+                "-o",
+                "${workspaceFolder}/build/${fileDirnameBasename}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "g++ (C++17) -> build/<lesson>.exe. Uses g++ from PATH."
+        },
+        {
+            "label": "build all lessons",
+            "type": "shell",
+            "command": "${workspaceFolder}/CPP/build-all.cmd",
+            "options": {
+                "cwd": "${workspaceFolder}/CPP"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Compiles every lesson and reports warnings."
+        }
+    ]
+}

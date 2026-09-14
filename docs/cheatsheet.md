@@ -1,0 +1,71 @@
+# C++ cheat sheet (first page)
+
+## Create
+```
+main.cpp        (the file name must end in .cpp)
+```
+
+## Compile
+```
+g++ main.cpp -o hello
+```
+- `g++` → the C++ compiler
+- `main.cpp` → your source file
+- `-o hello` → write the program to `hello.exe` (without `-o` you get `a.exe`)
+
+## Run
+```
+.\hello.exe      (PowerShell)
+hello.exe        (Command Prompt)
+```
+
+## The smallest C++ program
+```cpp
+#include <iostream>
+
+int main()
+{
+    std::cout << "Hello World!";
+    return 0;
+}
+```
+
+## Symbols you use every day
+| Symbol | Meaning |
+|--------|---------|
+| `;` | ends a statement |
+| `{ }` | a block (the body of a function / if / loop) |
+| `( )` | function parameters / conditions |
+| `" "` | text (a string) |
+| `' '` | a single character |
+| `<<` | send to output |
+| `\n` | new line |
+| `//` | a comment (ignored by the compiler) |
+
+## Printing
+```cpp
+std::cout << "Hello\n";        // prints "Hello" then a new line
+std::cout << "Age: " << 18;    // prints text and a number
+```
+
+## Reading input
+```cpp
+int age;
+std::cin >> age;               // read a whole number from the keyboard
+```
+
+## Variables (the main types)
+```cpp
+int    whole  = 42;     // whole numbers
+double price  = 9.99;   // decimal numbers
+char   letter = 'A';    // one character
+bool   ready  = true;   // true / false
+std::string name = "Sam";   // needs #include <string>
+```
+
+## The usual workflow
+```
+write  →  g++ main.cpp -o hello  →  .\hello.exe
+                 │
+                 └─ error? read it, fix the code, compile again
+```

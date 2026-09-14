@@ -3,8 +3,11 @@
 Four weeks, four layers. Each lesson is a standalone runnable program; the
 capstone is the same program refactored and extended at the end of every week.
 
-Target: **C++23**, built in **Code::Blocks** with **MinGW-w64 GCC 13+**.
-Compiler flags for every project: `-std=c++23 -Wall -Wextra -Wpedantic`.
+Target: **C++17**, edited in **Visual Studio Code** with the C/C++ extension and
+built with **MinGW-w64 GCC 13+**. Compiler flags for every program:
+`-std=c++17 -Wall -Wextra -Wpedantic`. Build with **Ctrl+Shift+B** in VS Code or
+`run.cmd <lesson-folder>` from the `CPP` folder. The tools use `g++` from `PATH`
+(or the `CXX` environment variable if set).
 
 ---
 
@@ -32,14 +35,15 @@ lines), teaches **one idea**, and prints with plain `std::cout`.
 add them up, print the total and average (~30 lines). No menu and no array yet.
 
 ### Week 1 outcomes
-- Build and run a Code::Blocks console project.
+- Build and run a single-file C++ program (VS Code or `run.cmd`).
 - Store values in variables and read input with `cin`.
 - Make decisions, repeat work with loops, and write a small function.
 
 ### Deliberately deferred (not in Week 1)
-`std::format`, `switch`/`enum`, references, arrays, pointers, `<random>`,
-`auto`, and overloads are introduced in later weeks so beginners meet one new
-idea at a time. Plain `std::cout` is used throughout Week 1.
+`switch`/`enum`, references, arrays, pointers, `<random>`, `auto`, and overloads
+are introduced in later weeks so beginners meet one new idea at a time.
+Output formatting with `<iomanip>` arrives in Week 2; plain `std::cout` is used
+throughout Week 1.
 
 ---
 
@@ -49,7 +53,7 @@ still one idea each.
 
 | # | Folder | Topic | Key ideas |
 |---|--------|-------|-----------|
-| 14 | `lesson14_format` | Nicer output | `std::format`: `{}`, `{:.2f}`, width and padding |
+| 14 | `lesson14_format` | Nicer output | `<iomanip>`: `fixed`, `setprecision`, `setw`, `left`/`right` |
 | 15 | `lesson15_arrays` | Arrays | fixed size, positions start at 0, looping |
 | 16 | `lesson16_array_stats` | Array summary | total, average, smallest, largest in one loop |
 | 17 | `lesson17_strings` | Text operations | join with `+`, `size()`, `[i]` |
@@ -94,20 +98,34 @@ offers `add`/`list`/`average`/`save`/`load`, and an abstract `Report` base with
 
 ---
 
-## Week 4 — Modern C++ & generalization
-| # | Topic | Key ideas |
-|---|-------|-----------|
-| 25 | Templates | function/class templates, concepts, `requires` |
-| 26 | STL containers | `map`, `set`, `unordered_map`, choosing a container |
-| 27 | Algorithms & lambdas | `<algorithm>`, `transform`, `accumulate`, captures |
-| 28 | Ranges | `std::ranges`, views, pipelines |
-| 29 | Exceptions | `throw`/`catch`, custom exceptions, `noexcept`, exception safety |
-| 30 | Move semantics | value categories, `std::move`, move ctor/assign, copy elision |
-| 31 | Modern vocabulary types | `std::optional`, `std::variant`, `std::expected` |
-| 32 | Challenge set | generic sort/filter/max, safe parsing |
+## Week 4 — Modern C++ & generalization (generated)
+The final layer: writing code that works for many types and reads cleanly.
 
-**Capstone Stage 4 (final):** generic `Repository<T>`, algorithm/ranges-based
-reports, `std::optional` lookups, exception handling, and `std::format` output.
+| # | Folder | Topic | Key ideas |
+|---|--------|-------|-----------|
+| 37 | `lesson37_templates_func` | Function templates | `template <typename T>`, deduction |
+| 38 | `lesson38_templates_class` | Class templates | `Box<T>` for any type |
+| 39 | `lesson39_stl_map` | `std::map` | key -> value, sorted keys, structured bindings |
+| 40 | `lesson40_stl_set` | `std::set` | unique items, auto-sorted |
+| 41 | `lesson41_algorithms` | `<algorithm>` | `sort`, `count`, `accumulate` |
+| 42 | `lesson42_lambdas` | Lambdas | inline functions, `count_if`, captures |
+| 43 | `lesson43_algorithms2` | Filter & transform | `copy_if`, `transform`, `back_inserter` |
+| 44 | `lesson44_exceptions` | Exceptions | `throw`/`catch`, `what()` |
+| 45 | `lesson45_move_semantics` | Move semantics | `std::move`, avoiding a copy |
+| 46 | `lesson46_optional_variant` | `optional` / `variant` | "maybe a value", one-of-several |
+| 47 | `lesson47_challenge_sort` | Challenge | sort students by mark with a lambda |
+| 48 | `lesson48_challenge_word_count` | Challenge | word frequency with a `map` |
+| 49 | `lesson49_challenge_safe_parse` | Challenge | safe parsing with `optional`/exceptions |
+
+**Capstone Stage 4 — `CPP/capstone/stage4`:** the final program. A generic
+`template <typename T> class Repository` stores any type; `Gradebook` uses
+`Repository<Student>` and adds `top()` (algorithm + lambda) and `find()`
+(`std::optional`); `save()`/`load()` use exceptions caught in `main`; output is
+aligned with `<iomanip>`. The menu is add / list / average / top / find / save /
+load / quit.
+
+> The course stays with `std::optional` + `std::variant` (both C++17); later
+> standards such as C++20/23 are out of scope.
 
 ---
 
@@ -120,7 +138,11 @@ reports, `std::optional` lookups, exception handling, and `std::format` output.
 - **Rubric:** correctness, memory safety (ASan/valgrind where available), code
   style, and design.
 
-## Toolchain fallbacks
-- `-std=c++23` rejected -> try `-std=c++2b`.
-- `std::format` / `std::ranges` / `std::expected` unavailable -> the lesson notes
-  a `std::cout`/loop-based fallback.
+## Toolchain notes
+- The course uses only **C++17** features, so it builds on any GCC/Clang from
+  ~2017 onward.
+- Ensure `g++` is on `PATH` (VS Code ships no compiler). If you cannot add it to
+  `PATH`, set `CXX` to the full path of your `g++.exe` before running
+  `run.cmd` / `build-all.cmd`.
+- Output formatting uses `<iomanip>` rather than `std::format` (which needs
+  C++20), keeping the lessons inside C++17.

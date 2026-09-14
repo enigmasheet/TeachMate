@@ -1,13 +1,25 @@
-# Code::Blocks / build artifacts
-bin/
-obj/
-*.o
+# Build output
+build/
 *.exe
+*.o
+*.obj
+*.out
+a.out
+*.pdb
+*.ilk
+
+# Old IDE project files (Code::Blocks / Dev-C++)
+*.cbp
+*.workspace
 *.layout
 *.depend
+*.dev
 
-# Editor / OS
-.vscode/
+# Editors / OS
 .idea/
+.vs/
+*~
+*.swp
 Thumbs.db
 desktop.ini
+.DS_Store
