@@ -54,6 +54,26 @@ int age;
 std::cin >> age;               // read a whole number from the keyboard
 ```
 
+## Control flow
+```cpp
+// if / else
+if (x > 0)         { /* … */ }
+else if (x == 0)    { /* … */ }
+else                 { /* … */ }
+
+// for loop
+for (int i = 0; i < 5; i++) { /* … */ }
+
+// while loop — checks before each turn
+while (n > 0) { n--; }
+
+// do-while — body always runs at least once
+do { std::cin >> n; } while (n <= 0);
+
+// break exits the innermost loop
+// continue skips to the next round
+```
+
 ## Variables (the main types)
 ```cpp
 int    whole  = 42;     // whole numbers

@@ -69,8 +69,12 @@ TeachMate/
   CPP/                      all C++ source code lives here
     run.cmd                 build + run one lesson
     build-all.cmd           compile every lesson and report warnings
-    week1/                  foundations: 13 short lessons + 3 challenges
+    week1/                  foundations: 13 short lessons + 3 challenges + 7 loop lessons
       lesson01_hello/main.cpp
+      lesson09_loops/main.cpp
+      lesson09a_for_variations/main.cpp
+      ...
+      lesson10_functions/main.cpp
       ...
     week2/                  data: formatting, arrays, strings, structs, vectors, files
       lesson14_format/main.cpp

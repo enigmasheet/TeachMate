@@ -29,6 +29,13 @@ lines), teaches **one idea**, and prints with plain `std::cout`.
 | 07 | `lesson07_arithmetic` | Arithmetic | `+ - * / %`, integer division |
 | 08 | `lesson08_decisions` | Decisions | `if` / `else` |
 | 09 | `lesson09_loops` | Loops | `for` |
+| 09a | `lesson09a_for_variations` | For variations | count down, step by 2, `i += 2` |
+| 09b | `lesson09b_while` | While loops | `while (cond)`, count unknown in advance |
+| 09c | `lesson09c_do_while` | Do-while loops | `do { } while ( )`, body runs at least once |
+| 09d | `lesson09d_break_continue` | break & continue | leave a loop early, skip a round |
+| 09e | `lesson09e_nested_loops` | Nested loops | a loop inside a loop, rows × columns |
+| 09f | `lesson09f_challenge_sentinel` | Challenge | sum numbers until `0` (while + break) |
+| 09g | `lesson09g_challenge_pattern` | Challenge | star triangle with nested loops |
 | 10 | `lesson10_functions` | Functions | a parameter and a return value |
 | 11 | `lesson11_fizzbuzz` | Challenge | `%` + `if`/`else if` inside a loop |
 | 12 | `lesson12_even_odd` | Challenge | testing with `%` |
@@ -42,7 +49,8 @@ arithmetic. Still no menu and no array.
 ### Week 1 outcomes
 - Build and run a single-file C++ program (VS Code or `run.cmd`).
 - Store values in variables and read input with `cin`.
-- Make decisions, repeat work with loops, and write a small function.
+- Make decisions, repeat work with `for`, `while` and `do…while` loops
+  (including `break`/`continue` and nested loops), and write a small function.
 
 ### Deliberately deferred (not in Week 1)
 `switch`/`enum`, references, arrays, pointers, `<random>`, `auto`, and overloads
