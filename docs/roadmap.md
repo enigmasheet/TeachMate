@@ -1,7 +1,10 @@
 # TeachMate Roadmap
 
-Four weeks, four layers. Each lesson is a standalone runnable program; the
-capstone is the same program refactored and extended at the end of every week.
+Four weeks, seven capstone steps. Each lesson is a standalone runnable program;
+the capstone is the same program refactored and extended as each week's ideas
+arrive. Every step only *adds* to the previous one — nothing is removed — so the
+final program is the sum of the whole course. Read the stages in order:
+`stage1`, `stage2a`, `stage2b`, `stage3a`, `stage3b`, `stage4a`, `stage4b`.
 
 Target: **C++17**, edited in **Visual Studio Code** with the C/C++ extension and
 built with **MinGW-w64 GCC 13+**. Compiler flags for every program:
@@ -31,8 +34,10 @@ lines), teaches **one idea**, and prints with plain `std::cout`.
 | 12 | `lesson12_even_odd` | Challenge | testing with `%` |
 | 13 | `lesson13_times_table` | Challenge | printing with a loop |
 
-**Capstone Stage 1 — `CPP/capstone/stage1`:** read three marks with a loop,
-add them up, print the total and average (~30 lines). No menu and no array yet.
+**Capstone stage1 — `CPP/capstone/stage1`:** read three marks with a loop, add
+them up, and compute the average with a small `average()` function (~35 lines).
+Uses only Week 1 ideas: variables, `std::cin`, a `for` loop, a function and
+arithmetic. Still no menu and no array.
 
 ### Week 1 outcomes
 - Build and run a single-file C++ program (VS Code or `run.cmd`).
@@ -66,10 +71,17 @@ still one idea each.
 | 24 | `lesson24_challenge_reverse` | Challenge | print a word backwards |
 | 25 | `lesson25_challenge_word_count` | Challenge | count characters and spaces in a line |
 
-**Capstone Stage 2 — `CPP/capstone/stage2`:** a `std::vector<Student>` where
-`Student` is a struct, a simple `if`/`else` menu (add, list, average, save, load,
-quit), and a text file so the data survives. This is where the menu + list
-tracker from Week 1 returns, and it uses functions and references.
+**Capstone stage2a — `CPP/capstone/stage2a`:** the marks move into a fixed
+array of `int`. Functions take the array and its size and report the total,
+average, largest and smallest mark, and `<iomanip>` prints the average to two
+decimals. This is the "array" step that `stage1` pointed forward to.
+
+**Capstone stage2b — `CPP/capstone/stage2b`:** each mark gains a name. A
+`struct Student` groups a name and a mark, a `std::vector<Student>` lets the
+list grow while the program runs, and an `if`/`else` menu (add, list, average,
+save, load, quit) appears for the first time. Functions take the vector by
+reference (`&` / `const &`), names are read with `std::getline`, and a text file
+makes the data survive.
 
 ---
 
@@ -90,11 +102,17 @@ Bundling data and behaviour together. Each lesson is still short and focused.
 | 35 | `lesson35_challenge_bank` | Challenge | an `Account` class with private state |
 | 36 | `lesson36_challenge_inventory` | Challenge | a class held in a `std::vector` |
 
-**Capstone Stage 3 — `CPP/capstone/stage3`:** the gradebook becomes genuinely
-object-oriented. `Student` hides its data, `Gradebook` owns the `vector` and
-offers `add`/`list`/`average`/`save`/`load`, and an abstract `Report` base with
-`SimpleReport`/`SummaryReport` shows virtual dispatch, chosen with a
-`std::unique_ptr`. The same add/list/average/save/load menu as Stage 2 continues.
+**Capstone stage3a — `CPP/capstone/stage3a`:** the gradebook becomes genuinely
+object-oriented. `Student` hides its data behind `private` and a constructor
+that keeps the mark inside 0..100, and `Gradebook` owns the `vector` and offers
+`add`/`list`/`average`/`save`/`load`. The same add/list/average/save/load menu as
+`stage2b` continues.
+
+**Capstone stage3b — `CPP/capstone/stage3b`:** the way the gradebook is reported
+becomes an object too. An abstract `Report` base with `SimpleReport` and
+`SummaryReport` subclasses shows inheritance and virtual dispatch, chosen with a
+`std::unique_ptr` and printed through the base pointer. The menu gains a
+"Report" option.
 
 ---
 
@@ -117,12 +135,19 @@ The final layer: writing code that works for many types and reads cleanly.
 | 48 | `lesson48_challenge_word_count` | Challenge | word frequency with a `map` |
 | 49 | `lesson49_challenge_safe_parse` | Challenge | safe parsing with `optional`/exceptions |
 
-**Capstone Stage 4 — `CPP/capstone/stage4`:** the final program. A generic
-`template <typename T> class Repository` stores any type; `Gradebook` uses
-`Repository<Student>` and adds `top()` (algorithm + lambda) and `find()`
-(`std::optional`); `save()`/`load()` use exceptions caught in `main`; output is
-aligned with `<iomanip>`. The menu is add / list / average / top / find / save /
-load / quit.
+**Capstone stage4a — `CPP/capstone/stage4a`:** the container becomes reusable.
+A generic `template <typename T> class Repository` stores any type, and
+`Gradebook` keeps a `Repository<Student>` instead of a raw `vector`. `top()`
+finds the best student with `std::max_element` and a lambda. Every Week 3 idea —
+including the `Report` hierarchy — stays. The menu is add / list / average /
+top / report / save / load / quit.
+
+**Capstone stage4b — `CPP/capstone/stage4b` (final):** `top()` and a new
+`find()` return `std::optional<Student>` to express "maybe a student";
+`save()`/`load()` throw exceptions caught in `main`; `Repository::add` takes its
+item by value and uses `std::move` to avoid a copy; and `<iomanip>` aligns the
+output. The final menu is add / list / average / top / find / report / save /
+load / quit — the union of all four weeks.
 
 > The course stays with `std::optional` + `std::variant` (both C++17); later
 > standards such as C++20/23 are out of scope.

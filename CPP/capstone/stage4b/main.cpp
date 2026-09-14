@@ -1,26 +1,33 @@
-// Capstone - Stage 4: A generic, modern gradebook
-// ===============================================
-// The final layer ties the whole course together:
+// Capstone - Stage 4b: A generic, modern gradebook (final)
+// =======================================================
+// The last layer ties the whole course together. Every earlier idea is
+// still here, and Week 4 adds the modern pieces:
 //   - templates        : Repository<T> works for any type
-//   - classes          : Student and Gradebook
 //   - algorithms/lambda: top() finds the best student
-//   - optional         : find() may return "no student"
+//   - optional         : top() and find() may return "no student"
 //   - exceptions       : save()/load() report problems safely
-//   - <iomanip>        : tidy output
+//   - move semantics   : std::move avoids copying a student into the list
+//   - <iomanip>        : tidy, aligned output
+//   - classes/polymorphism: Student, Gradebook and the Report hierarchy
 //
 // Menu:
-//   1) Add  2) List  3) Average  4) Top  5) Find  6) Save  7) Load  8) Quit
+//   1) Add   2) List   3) Average   4) Top   5) Find
+//   6) Report   7) Save   8) Load   9) Quit
 
 #include <algorithm>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <memory>
 #include <optional>
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 
 // A container that can store a list of any type T.
+// add() takes its item by value and then moves it in, so the copy made by
+// the caller is reused instead of copied again.
 template <typename T>
 class Repository
 {
@@ -28,9 +35,9 @@ private:
     std::vector<T> items;
 
 public:
-    void add(const T &item)
+    void add(T item)
     {
-        items.push_back(item);
+        items.push_back(std::move(item));
     }
 
     int size() const
@@ -88,29 +95,15 @@ private:
     Repository<Student> students;
 
 public:
-    void add(const Student &s)
+    // Take the student by value, then std::move it into the repository.
+    void add(Student s)
     {
-        students.add(s);
+        students.add(std::move(s));
     }
 
     int count() const
     {
         return students.size();
-    }
-
-    void list() const
-    {
-        if (students.empty())
-        {
-            std::cout << "No students yet.\n";
-            return;
-        }
-
-        for (const Student &s : students.all())
-        {
-            std::cout << std::left << std::setw(10) << s.getName()
-                      << std::right << s.getMark() << "\n";
-        }
     }
 
     double average() const
@@ -126,7 +119,20 @@ public:
         return total / size;
     }
 
-    // Uses an algorithm plus a lambda to find the best student.
+    void list() const
+    {
+        if (students.empty())
+        {
+            std::cout << "No students yet.\n";
+            return;
+        }
+
+        for (const Student &s : students.all())
+            std::cout << std::left << std::setw(12) << s.getName()
+                      << std::right << s.getMark() << "\n";
+    }
+
+    // Uses an algorithm plus a lambda; the optional says "maybe a student".
     std::optional<Student> top() const
     {
         if (students.empty())
@@ -136,7 +142,6 @@ public:
         auto best = std::max_element(all.begin(), all.end(),
                                      [](const Student &a, const Student &b)
                                      { return a.getMark() < b.getMark(); });
-
         return *best;
     }
 
@@ -156,7 +161,7 @@ public:
             throw std::runtime_error("Could not open students.txt for writing");
 
         for (const Student &s : students.all())
-            out << s.getName() << " " << s.getMark() << "\n";
+            out << s.getName() << "\n" << s.getMark() << "\n";
 
         std::cout << "Saved " << students.size() << " student(s).\n";
     }
@@ -170,10 +175,42 @@ public:
         students.clear();
         std::string name;
         int mark = 0;
-        while (in >> name >> mark)
+        while (std::getline(in, name))
+        {
+            in >> mark;
+            in.ignore(); // drop the newline that follows the mark
             students.add(Student(name, mark));
+        }
 
         std::cout << "Loaded " << students.size() << " student(s).\n";
+    }
+};
+
+// Abstract base class: the "= 0" makes it impossible to create a plain Report.
+class Report
+{
+public:
+    virtual ~Report() {}
+    virtual void print(const Gradebook &book) const = 0;
+};
+
+class SimpleReport : public Report
+{
+public:
+    void print(const Gradebook &book) const override
+    {
+        book.list();
+    }
+};
+
+class SummaryReport : public Report
+{
+public:
+    void print(const Gradebook &book) const override
+    {
+        std::cout << "Students: " << book.count() << "\n";
+        std::cout << std::fixed << std::setprecision(2);
+        std::cout << "Average:  " << book.average() << "\n";
     }
 };
 
@@ -184,8 +221,8 @@ int main()
 
     while (running)
     {
-        std::cout << "\n1) Add  2) List  3) Average  4) Top"
-                     "  5) Find  6) Save  7) Load  8) Quit\n";
+        std::cout << "\n1) Add  2) List  3) Average  4) Top  5) Find"
+                     "  6) Report  7) Save  8) Load  9) Quit\n";
         std::cout << "Choice: ";
 
         int choice = 0;
@@ -198,7 +235,7 @@ int main()
                 std::string name;
                 int mark = 0;
                 std::cout << "Name: ";
-                std::cin >> name;
+                std::getline(std::cin >> std::ws, name);
                 std::cout << "Mark: ";
                 std::cin >> mark;
                 book.add(Student(name, mark));
@@ -221,7 +258,7 @@ int main()
             {
                 std::string name;
                 std::cout << "Name to find: ";
-                std::cin >> name;
+                std::getline(std::cin >> std::ws, name);
 
                 std::optional<Student> found = book.find(name);
                 if (found.has_value())
@@ -231,13 +268,19 @@ int main()
                     std::cout << "Not found.\n";
             }
             else if (choice == 6)
-                book.save();
+            {
+                std::unique_ptr<Report> report;
+                report = std::make_unique<SummaryReport>();
+                report->print(book);
+            }
             else if (choice == 7)
-                book.load();
+                book.save();
             else if (choice == 8)
+                book.load();
+            else if (choice == 9)
                 running = false;
             else
-                std::cout << "Please choose 1-8.\n";
+                std::cout << "Please choose 1-9.\n";
         }
         catch (const std::exception &e)
         {

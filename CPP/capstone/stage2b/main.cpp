@@ -1,8 +1,12 @@
-// Capstone - Stage 2: Student gradebook with a file
-// =================================================
-// This layer combines Week 1 and Week 2 ideas:
-//   - a struct (Student), a std::vector, loops and functions
-//   - a simple if/else menu
+// Capstone - Stage 2b: Student gradebook with a file
+// ==================================================
+// Stage 2a kept the marks in an array of plain ints. Now each mark gets a
+// name, and the list can grow while the program runs. This layer combines
+// all of Week 2:
+//   - a struct (Student) that groups related fields
+//   - a std::vector that can grow with push_back
+//   - functions that take the vector by reference so they can change it
+//   - std::getline so names may contain spaces
 //   - reading and writing a text file so data survives
 //
 // Menu:
@@ -10,6 +14,7 @@
 //   4) Save to file    5) Load from file  6) Quit
 
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -20,17 +25,20 @@ struct Student
     int mark;
 };
 
+// The & means the function works on the caller's vector directly.
+// It has no const, because we push a new student into it.
 void addStudent(std::vector<Student> &students)
 {
     Student s;
     std::cout << "Name: ";
-    std::cin >> s.name;
+    std::getline(std::cin >> std::ws, s.name);
     std::cout << "Mark: ";
     std::cin >> s.mark;
     students.push_back(s);
     std::cout << "Added " << s.name << ".\n";
 }
 
+// const & means "look at the caller's vector without copying or changing it".
 void listStudents(const std::vector<Student> &students)
 {
     if (students.empty())
@@ -39,11 +47,9 @@ void listStudents(const std::vector<Student> &students)
         return;
     }
 
-    // const & means "look at each student without copying or changing it".
     for (const Student &s : students)
-    {
-        std::cout << s.name << " - " << s.mark << "\n";
-    }
+        std::cout << std::left << std::setw(12) << s.name
+                  << std::right << s.mark << "\n";
 }
 
 void showAverage(const std::vector<Student> &students)
@@ -61,14 +67,15 @@ void showAverage(const std::vector<Student> &students)
     double count = students.size();
     double average = total / count;
 
-    std::cout << "Average mark: " << average << "\n";
+    std::cout << std::fixed << std::setprecision(2)
+              << "Average mark: " << average << "\n";
 }
 
 void saveToFile(const std::vector<Student> &students)
 {
     std::ofstream out("students.txt");
     for (const Student &s : students)
-        out << s.name << " " << s.mark << "\n";
+        out << s.name << "\n" << s.mark << "\n";
 
     std::cout << "Saved " << students.size() << " student(s).\n";
 }
@@ -84,8 +91,12 @@ void loadFromFile(std::vector<Student> &students)
 
     students.clear();
     Student s;
-    while (in >> s.name >> s.mark)
+    while (std::getline(in, s.name))
+    {
+        in >> s.mark;
+        in.ignore(); // drop the newline that follows the mark
         students.push_back(s);
+    }
 
     std::cout << "Loaded " << students.size() << " student(s).\n";
 }
@@ -126,5 +137,5 @@ int main()
 // Try it:
 //   1. Add a menu option to print only students with a mark of 80 or more.
 //   2. Add a function to find the best mark.
-//   3. In Week 3 this grows again: Student becomes a class that protects
-//      its data, and the gradebook gets its own class.
+//   3. In stage3a the data and the operations move together into classes:
+//      Student protects its data, and a Gradebook owns the whole vector.

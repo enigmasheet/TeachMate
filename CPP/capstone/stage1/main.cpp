@@ -1,11 +1,18 @@
 // Capstone - Stage 1: Average of three marks
 // ==========================================
 // The first layer of the course project. It uses only Week 1 ideas:
-// variables, input, a loop, arithmetic and output.
+// variables, input, a loop, one small function, arithmetic and output.
 //
 // It asks for three marks, adds them up, and prints the total and average.
 
 #include <iostream>
+
+// A function keeps the arithmetic in one named place.
+double average(int total, int count)
+{
+    double divisor = count;
+    return total / divisor;
+}
 
 int main()
 {
@@ -19,16 +26,13 @@ int main()
         total = total + mark;
     }
 
-    // Dividing by 3.0 (not 3) gives a decimal answer.
-    double average = total / 3.0;
-
     std::cout << "\nTotal marks: " << total << "\n";
-    std::cout << "Average: " << average << "\n";
+    std::cout << "Average: " << average(total, 3) << "\n";
     return 0;
 }
 
 // Try it:
 //   1. Read five marks instead of three.
 //   2. Print the message "Pass" when the average is 60 or more.
-//   3. In Week 2 this program grows: it will store the marks in an array
-//      and let the user keep adding scores through a menu.
+//   3. In stage2a the marks move into an array, so the program can keep
+//      them and report more than just the average.

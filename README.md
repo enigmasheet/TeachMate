@@ -81,22 +81,30 @@ TeachMate/
     week4/                  modern: templates, STL, algorithms, optional, exceptions
       lesson37_templates_func/main.cpp
       ...
-    capstone/stage1/        first layer of the evolving project
-    capstone/stage2/        structs + vector + file menu
-    capstone/stage3/        classes + polymorphism + smart pointer
-    capstone/stage4/        generic Repository<T> (final)
+    capstone/stage1/        loop + one function: average of three marks
+    capstone/stage2a/       marks move into an array, with stats functions
+    capstone/stage2b/       struct + vector + menu + file save/load
+    capstone/stage3a/       Student and Gradebook classes (encapsulation)
+    capstone/stage3b/       polymorphic Report class hierarchy
+    capstone/stage4a/       generic Repository<T> + top() algorithm
+    capstone/stage4b/       optional + exceptions (final program)
   build/                    compiled programs (created by the tools; ignored by git)
 ```
 
 ## Roadmap at a glance
 | Week | Theme | Capstone layer |
 |------|-------|----------------|
-| 1 | Foundations: printing, variables, input, flow, functions | Average of three marks (no menu/array yet) |
-| 2 | Formatting, arrays, strings, structs, vectors, files | Records in a `vector`, save/load to file |
-| 3 | Classes, encapsulation, RAII, inheritance, polymorphism | `Student` + `Gradebook` classes, polymorphic `Report` |
-| 4 | Templates, STL, algorithms, optional/variant, exceptions | Generic `Repository<T>` final application |
+| 1 | Foundations: printing, variables, input, flow, functions | **stage1** — average of three marks (loop + function, no menu yet) |
+| 2 | Formatting, arrays, strings, structs, vectors, files | **stage2a** array of marks + stats, then **stage2b** struct + vector + menu + file |
+| 3 | Classes, encapsulation, RAII, inheritance, polymorphism | **stage3a** `Student`/`Gradebook` classes, then **stage3b** polymorphic `Report` |
+| 4 | Templates, STL, algorithms, optional/variant, exceptions | **stage4a** generic `Repository<T>` + `top()`, then **stage4b** `optional`/exceptions (final) |
 
 See `docs/roadmap.md` for every lesson and challenge.
+
+Each capstone stage is a **small step** over the one before it, and no feature is
+ever removed: the final `stage4b` program is the sum of all four weeks. Read the
+stages in order (`stage1`, `stage2a`, `stage2b`, `stage3a`, `stage3b`, `stage4a`,
+`stage4b`) to watch one project grow.
 
 ## How to use it as a student
 - Read the comments at the top of each `main.cpp` — they state the goal.
