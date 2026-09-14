@@ -1,0 +1,13 @@
+# Code::Blocks / build artifacts
+bin/
+obj/
+*.o
+*.exe
+*.layout
+*.depend
+
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
