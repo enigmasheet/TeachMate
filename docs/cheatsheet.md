@@ -31,16 +31,16 @@ int main()
 ```
 
 ## Symbols you use every day
-| Symbol | Meaning |
-|--------|---------|
-| `;` | ends a statement |
-| `{ }` | a block (the body of a function / if / loop) |
-| `( )` | function parameters / conditions |
-| `" "` | text (a string) |
-| `' '` | a single character |
-| `<<` | send to output |
-| `\n` | new line |
-| `//` | a comment (ignored by the compiler) |
+| Symbol | Meaning                        |
+| ------ | ------------------------------ |
+| `;`    | ends a statement               |
+| `{ }`  | a block (the body of a function / if / loop) |
+| `( )`  | function parameters / conditions |
+| `" "`  | text (a string)                |
+| `' '`  | a single character             |
+| `<<`   | send to output                 |
+| `\n`   | new line                       |
+| `//`   | a comment (ignored by the compiler) |
 
 ## Printing
 ```cpp

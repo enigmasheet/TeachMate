@@ -18,28 +18,28 @@ built with **MinGW-w64 GCC 13+**. Compiler flags for every program:
 From a blank file to reusable functions. Every program is short (roughly 10–25
 lines), teaches **one idea**, and prints with plain `std::cout`.
 
-| # | Folder | Topic | Key ideas |
-|---|--------|-------|-----------|
-| 01 | `lesson01_hello` | Hello! | `main`, `#include <iostream>`, one `std::cout`, `"\n"` |
-| 02 | `lesson02_printing` | Several lines | several `cout` statements, comments |
-| 03 | `lesson03_int` | Whole numbers | `int`, assignment, adding |
-| 04 | `lesson04_double` | Decimal numbers | `double` |
-| 05 | `lesson05_string` | Text | `std::string` |
-| 06 | `lesson06_input` | Reading input | `std::cin >>` |
-| 07 | `lesson07_arithmetic` | Arithmetic | `+ - * / %`, integer division |
-| 08 | `lesson08_decisions` | Decisions | `if` / `else` |
-| 09 | `lesson09_loops` | Loops | `for` |
-| 09a | `lesson09a_for_variations` | For variations | count down, step by 2, `i += 2` |
-| 09b | `lesson09b_while` | While loops | `while (cond)`, count unknown in advance |
-| 09c | `lesson09c_do_while` | Do-while loops | `do { } while ( )`, body runs at least once |
-| 09d | `lesson09d_break_continue` | break & continue | leave a loop early, skip a round |
-| 09e | `lesson09e_nested_loops` | Nested loops | a loop inside a loop, rows × columns |
-| 09f | `lesson09f_challenge_sentinel` | Challenge | sum numbers until `0` (while + break) |
-| 09g | `lesson09g_challenge_pattern` | Challenge | star triangle with nested loops |
-| 10 | `lesson10_functions` | Functions | a parameter and a return value |
-| 11 | `lesson11_fizzbuzz` | Challenge | `%` + `if`/`else if` inside a loop |
-| 12 | `lesson12_even_odd` | Challenge | testing with `%` |
-| 13 | `lesson13_times_table` | Challenge | printing with a loop |
+| #   | Folder                       | Topic          | Key ideas                                  |
+| --- | ---------------------------- | -------------- | ------------------------------------------ |
+| 01  | `lesson01_hello`             | Hello!         | `main`, `#include <iostream>`, one `std::cout`, `"\n"` |
+| 02  | `lesson02_printing`          | Several lines  | several `cout` statements, comments        |
+| 03  | `lesson03_int`               | Whole numbers  | `int`, assignment, adding                  |
+| 04  | `lesson04_double`            | Decimal numbers| `double`                                   |
+| 05  | `lesson05_string`            | Text           | `std::string`                              |
+| 06  | `lesson06_input`             | Reading input  | `std::cin >>`                              |
+| 07  | `lesson07_arithmetic`        | Arithmetic     | `+ - * / %`, integer division              |
+| 08  | `lesson08_decisions`         | Decisions      | `if` / `else`                              |
+| 09  | `lesson09_loops`             | Loops          | `for`                                      |
+| 09a | `lesson09a_for_variations`   | For variations | count down, step by 2, `i += 2`            |
+| 09b | `lesson09b_while`            | While loops    | `while (cond)`, count unknown in advance   |
+| 09c | `lesson09c_do_while`         | Do-while loops | `do { } while ( )`, body runs at least once |
+| 09d | `lesson09d_break_continue`   | break & continue | leave a loop early, skip a round         |
+| 09e | `lesson09e_nested_loops`     | Nested loops   | a loop inside a loop, rows × columns       |
+| 09f | `lesson09f_challenge_sentinel` | Challenge    | sum numbers until `0` (while + break)      |
+| 09g | `lesson09g_challenge_pattern`| Challenge      | star triangle with nested loops            |
+| 10  | `lesson10_functions`         | Functions      | a parameter and a return value             |
+| 11  | `lesson11_fizzbuzz`          | Challenge      | `%` + `if`/`else if` inside a loop         |
+| 12  | `lesson12_even_odd`          | Challenge      | testing with `%`                           |
+| 13  | `lesson13_times_table`       | Challenge      | printing with a loop                       |
 
 **Capstone stage1 — `CPP/capstone/stage1`:** read three marks with a loop, add
 them up, and compute the average with a small `average()` function (~35 lines).
@@ -64,20 +64,20 @@ throughout Week 1.
 More data, and data that survives after the program exits. Still short programs,
 still one idea each.
 
-| # | Folder | Topic | Key ideas |
-|---|--------|-------|-----------|
-| 14 | `lesson14_format` | Nicer output | `<iomanip>`: `fixed`, `setprecision`, `setw`, `left`/`right` |
-| 15 | `lesson15_arrays` | Arrays | fixed size, positions start at 0, looping |
-| 16 | `lesson16_array_stats` | Array summary | total, average, smallest, largest in one loop |
-| 17 | `lesson17_strings` | Text operations | join with `+`, `size()`, `[i]` |
-| 18 | `lesson18_getline` | Reading a line | `std::getline` (text with spaces) |
-| 19 | `lesson19_structs` | Structs | group related fields into one type |
-| 20 | `lesson20_vector` | `std::vector` | `push_back`, `size()`, range-based `for` |
-| 21 | `lesson21_files` | File I/O | `ofstream` / `ifstream`, read back what you wrote |
-| 22 | `lesson22_references` | Passing by reference | `&` lets a function change the caller's variable |
-| 23 | `lesson23_challenge_max` | Challenge | largest value in an array |
-| 24 | `lesson24_challenge_reverse` | Challenge | print a word backwards |
-| 25 | `lesson25_challenge_word_count` | Challenge | count characters and spaces in a line |
+| #   | Folder                       | Topic          | Key ideas                                                      |
+| --- | ---------------------------- | -------------- | -------------------------------------------------------------- |
+| 14  | `lesson14_format`            | Nicer output   | `<iomanip>`: `fixed`, `setprecision`, `setw`, `left`/`right`  |
+| 15  | `lesson15_arrays`            | Arrays         | fixed size, positions start at 0, looping                      |
+| 16  | `lesson16_array_stats`       | Array summary  | total, average, smallest, largest in one loop                  |
+| 17  | `lesson17_strings`           | Text operations| join with `+`, `size()`, `[i]`                                 |
+| 18  | `lesson18_getline`           | Reading a line | `std::getline` (text with spaces)                              |
+| 19  | `lesson19_structs`           | Structs        | group related fields into one type                             |
+| 20  | `lesson20_vector`            | `std::vector`  | `push_back`, `size()`, range-based `for`                       |
+| 21  | `lesson21_files`             | File I/O       | `ofstream` / `ifstream`, read back what you wrote              |
+| 22  | `lesson22_references`        | Passing by reference | `&` lets a function change the caller's variable           |
+| 23  | `lesson23_challenge_max`     | Challenge      | largest value in an array                                      |
+| 24  | `lesson24_challenge_reverse` | Challenge      | print a word backwards                                         |
+| 25  | `lesson25_challenge_word_count` | Challenge   | count characters and spaces in a line                          |
 
 **Capstone stage2a — `CPP/capstone/stage2a`:** the marks move into a fixed
 array of `int`. Functions take the array and its size and report the total,
@@ -96,19 +96,19 @@ makes the data survive.
 ## Week 3 — Object-Oriented Programming (generated)
 Bundling data and behaviour together. Each lesson is still short and focused.
 
-| # | Folder | Topic | Key ideas |
-|---|--------|-------|-----------|
-| 26 | `lesson26_classes` | Classes | a class with data and methods |
-| 27 | `lesson27_constructors` | Constructors | initialize an object at creation |
-| 28 | `lesson28_encapsulation` | Hiding data | `private` data, getters/setters, validation |
-| 29 | `lesson29_destructors_raii` | Destructors & RAII | `~Tracer`, scope, automatic cleanup |
-| 30 | `lesson30_operator_overload` | Operator overloading | `operator+` on a `Point` |
-| 31 | `lesson31_inheritance` | Inheritance | base/derived classes, constructor chaining |
-| 32 | `lesson32_polymorphism` | Polymorphism | `virtual`, `override`, base-class references |
-| 33 | `lesson33_smart_pointers` | Smart pointers | `unique_ptr`, `make_unique`, automatic delete |
-| 34 | `lesson34_challenge_shapes` | Challenge | shape hierarchy with virtual `area()` |
-| 35 | `lesson35_challenge_bank` | Challenge | an `Account` class with private state |
-| 36 | `lesson36_challenge_inventory` | Challenge | a class held in a `std::vector` |
+| #   | Folder                       | Topic              | Key ideas                                      |
+| --- | ---------------------------- | ------------------ | ---------------------------------------------- |
+| 26  | `lesson26_classes`           | Classes            | a class with data and methods                  |
+| 27  | `lesson27_constructors`      | Constructors       | initialize an object at creation               |
+| 28  | `lesson28_encapsulation`     | Hiding data        | `private` data, getters/setters, validation    |
+| 29  | `lesson29_destructors_raii`  | Destructors & RAII | `~Tracer`, scope, automatic cleanup            |
+| 30  | `lesson30_operator_overload` | Operator overloading | `operator+` on a `Point`                     |
+| 31  | `lesson31_inheritance`       | Inheritance        | base/derived classes, constructor chaining     |
+| 32  | `lesson32_polymorphism`      | Polymorphism       | `virtual`, `override`, base-class references   |
+| 33  | `lesson33_smart_pointers`    | Smart pointers     | `unique_ptr`, `make_unique`, automatic delete  |
+| 34  | `lesson34_challenge_shapes`  | Challenge          | shape hierarchy with virtual `area()`          |
+| 35  | `lesson35_challenge_bank`    | Challenge          | an `Account` class with private state          |
+| 36  | `lesson36_challenge_inventory` | Challenge        | a class held in a `std::vector`                |
 
 **Capstone stage3a — `CPP/capstone/stage3a`:** the gradebook becomes genuinely
 object-oriented. `Student` hides its data behind `private` and a constructor
@@ -127,21 +127,21 @@ becomes an object too. An abstract `Report` base with `SimpleReport` and
 ## Week 4 — Modern C++ & generalization (generated)
 The final layer: writing code that works for many types and reads cleanly.
 
-| # | Folder | Topic | Key ideas |
-|---|--------|-------|-----------|
-| 37 | `lesson37_templates_func` | Function templates | `template <typename T>`, deduction |
-| 38 | `lesson38_templates_class` | Class templates | `Box<T>` for any type |
-| 39 | `lesson39_stl_map` | `std::map` | key -> value, sorted keys, structured bindings |
-| 40 | `lesson40_stl_set` | `std::set` | unique items, auto-sorted |
-| 41 | `lesson41_algorithms` | `<algorithm>` | `sort`, `count`, `accumulate` |
-| 42 | `lesson42_lambdas` | Lambdas | inline functions, `count_if`, captures |
-| 43 | `lesson43_algorithms2` | Filter & transform | `copy_if`, `transform`, `back_inserter` |
-| 44 | `lesson44_exceptions` | Exceptions | `throw`/`catch`, `what()` |
-| 45 | `lesson45_move_semantics` | Move semantics | `std::move`, avoiding a copy |
-| 46 | `lesson46_optional_variant` | `optional` / `variant` | "maybe a value", one-of-several |
-| 47 | `lesson47_challenge_sort` | Challenge | sort students by mark with a lambda |
-| 48 | `lesson48_challenge_word_count` | Challenge | word frequency with a `map` |
-| 49 | `lesson49_challenge_safe_parse` | Challenge | safe parsing with `optional`/exceptions |
+| #   | Folder                       | Topic               | Key ideas                                    |
+| --- | ---------------------------- | ------------------- | -------------------------------------------- |
+| 37  | `lesson37_templates_func`    | Function templates  | `template <typename T>`, deduction           |
+| 38  | `lesson38_templates_class`   | Class templates     | `Box<T>` for any type                        |
+| 39  | `lesson39_stl_map`           | `std::map`          | key -> value, sorted keys, structured bindings |
+| 40  | `lesson40_stl_set`           | `std::set`          | unique items, auto-sorted                    |
+| 41  | `lesson41_algorithms`        | `<algorithm>`       | `sort`, `count`, `accumulate`                |
+| 42  | `lesson42_lambdas`           | Lambdas             | inline functions, `count_if`, captures       |
+| 43  | `lesson43_algorithms2`       | Filter & transform  | `copy_if`, `transform`, `back_inserter`      |
+| 44  | `lesson44_exceptions`        | Exceptions          | `throw`/`catch`, `what()`                    |
+| 45  | `lesson45_move_semantics`    | Move semantics      | `std::move`, avoiding a copy                 |
+| 46  | `lesson46_optional_variant`  | `optional` / `variant` | "maybe a value", one-of-several            |
+| 47  | `lesson47_challenge_sort`    | Challenge           | sort students by mark with a lambda          |
+| 48  | `lesson48_challenge_word_count` | Challenge        | word frequency with a `map`                  |
+| 49  | `lesson49_challenge_safe_parse` | Challenge        | safe parsing with `optional`/exceptions      |
 
 **Capstone stage4a — `CPP/capstone/stage4a`:** the container becomes reusable.
 A generic `template <typename T> class Repository` stores any type, and
