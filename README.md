@@ -6,10 +6,12 @@ single capstone project ("Gradebook / Student Records Manager") grows along with
 the material.
 
 ## Who this is for
+
 Students who have never written C++, or who have written a little code in another
 language. No prior C/C++ experience is assumed.
 
 ## Toolchain (VS Code + a C++17 compiler)
+
 The course targets **C++17** — the sweet spot for teaching: modern enough for
 `std::optional`, `std::variant`, structured bindings and move semantics, without
 the extra syntax of later standards.
@@ -24,11 +26,14 @@ Short version:
 
 1. Install **VS Code** and **MSYS2** (<https://www.msys2.org/>, default `C:\msys64`).
 2. Open **MSYS2 UCRT64**, run `pacman -Syu` (repeat until clean), then:
-   ```
+
+   ```sh
    pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain
    ```
+
 3. Add `C:\msys64\ucrt64\bin` to your **PATH**, reopen the terminal, and check:
-   ```
+
+   ```sh
    g++ --version
    ```
 
@@ -39,6 +44,7 @@ variable to the full path of your `g++.exe` (the `run.cmd` and `build-all.cmd`
 scripts honour `CXX`).
 
 ### Quick start (VS Code)
+
 1. Open the `TeachMate` folder in VS Code (**File → Open Folder…**).
 2. Open any lesson, e.g. `CPP/week1/lesson01_hello/main.cpp`.
 3. **Ctrl+Shift+B** builds it; **F5** builds and debugs it.
@@ -47,19 +53,24 @@ scripts honour `CXX`).
    (Extensions view → search `C/C++` → Install).
 
 ### Quick start (terminal)
+
 From the `CPP` folder:
-```
+
+```sh
 run.cmd week1\lesson01_hello
 ```
+
 This compiles and runs one lesson with the same compiler and flags.
 
 ## Why one file per lesson?
+
 Every lesson is a **single `main.cpp`**. There are no project files to create or
 configure, so students spend their attention on C++ concepts (variables, loops,
 functions, classes, the STL) instead of on build settings.
 
 ## Repository layout
-```
+
+```txt
 TeachMate/
   README.md                 this file
   .vscode/                  shared VS Code build/debug config (C++17, g++)
@@ -96,8 +107,9 @@ TeachMate/
 ```
 
 ## Roadmap at a glance
+
 | Week | Theme | Capstone layer |
-|------|-------|----------------|
+| --- | --- | --- |
 | 1 | Foundations: printing, variables, input, flow, functions | **stage1** — average of three marks (loop + function, no menu yet) |
 | 2 | Formatting, arrays, strings, structs, vectors, files | **stage2a** array of marks + stats, then **stage2b** struct + vector + menu + file |
 | 3 | Classes, encapsulation, RAII, inheritance, polymorphism | **stage3a** `Student`/`Gradebook` classes, then **stage3b** polymorphic `Report` |
@@ -111,6 +123,7 @@ stages in order (`stage1`, `stage2a`, `stage2b`, `stage3a`, `stage3b`, `stage4a`
 `stage4b`) to watch one project grow.
 
 ## How to use it as a student
+
 - Read the comments at the top of each `main.cpp` — they state the goal.
 - Type the program yourself at least once; do not only run it.
 - Do the "Try it" prompts before moving on.
